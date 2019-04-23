@@ -156,9 +156,9 @@ alert tls any any -> any any (msg:"TGI HUNT JA3 SSL-Client Fingerprint Detected 
 
 alert tls any any -> any any (msg:"TGI HUNT JA3 SSL-Client Fingerprint Detected (GoldenAxe Ransomware)"; ja3_hash; content:"5001b4c2a48c94b76ca1f0199345fe60"; reference:md5,87c1b3e2b788dd54d196fb67ba0da6dc; sid:2600140; rev:1;)
 
-alert http any any -> any any (msg:"TGI HUNT directory traversal chars in HTTP Request Header"; flow:established,to_server; http.header; content:"|2e 2e 5c|"; threshold:type limit, track by_src, seconds 60, count 1; classtype:bad-unknown; sid:2600141; rev:1;)
+alert http any any -> any any (msg:"TGI HUNT directory traversal chars in HTTP Request Header"; flow:established,to_server; http_header; content:"|2e 2e 5c|"; threshold:type limit, track by_src, seconds 60, count 1; classtype:bad-unknown; sid:2600141; rev:1;)
 
-alert http any any -> any any (msg:"TGI HUNT directory traversal chars in HTTP Request Header"; flow:established,to_server; http.header; content:"|2e 2e 2f|"; threshold:type limit, track by_src, seconds 60, count 1; classtype:bad-unknown; sid:2600142; rev:1;)
+alert http any any -> any any (msg:"TGI HUNT directory traversal chars in HTTP Request Header"; flow:established,to_server; http_header; content:"|2e 2e 2f|"; threshold:type limit, track by_src, seconds 60, count 1; classtype:bad-unknown; sid:2600142; rev:1;)
 
 alert ftp-data $HOME_NET any -> $EXTERNAL_NET any (msg:"TGI HUNT Password Artifact Outbound in FTP"; flow:established,to_server; content:"Password"; fast_pattern; pcre:"/\bPassword\b/"; reference:url,github.com/AlessandroZ/LaZagne; classtype:trojan-activity; sid:2600143; rev:1;)
 
